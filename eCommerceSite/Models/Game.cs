@@ -17,5 +17,7 @@ namespace eCommerceSite.Models
         /// </summary>
         [Range(0, 1000)]
         public double Price { get; set; }
+
+        // ToDo: Add rating
     }
 }
