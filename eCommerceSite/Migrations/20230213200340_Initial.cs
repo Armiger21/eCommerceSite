@@ -15,12 +15,12 @@ namespace eCommerceSite.Migrations
                 columns: table => new
                 {
                     GameId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
+                        .Annotation("SqlServer:Identity", "1, 1"),
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Games", x => x.GameId);
-                });
+                });;
         }
 
         /// <inheritdoc />
