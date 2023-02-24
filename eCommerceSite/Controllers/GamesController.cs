@@ -1,6 +1,7 @@
 ﻿using eCommerceSite.Data;
 using eCommerceSite.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace eCommerceSite.Controllers
 {
@@ -11,7 +12,14 @@ namespace eCommerceSite.Controllers
         {
             _context = context;
         }
+        public async Task<IActionResult> Index()
+        {
+            // List<Game> games = _context.Games.ToList();
+            List<Game> games = await (from game in _context.Games
+                                      select game).ToListAsync();
 
+            return View(games);
+        }
         [HttpGet]
         public IActionResult Create()
         {
@@ -26,7 +34,7 @@ namespace eCommerceSite.Controllers
                  _context.Games.Add(g);              // Prepares insert
                  await _context.SaveChangesAsync(); // pending insert
 
-                 ViewDate["Message"] = $"{g.Title} was added successfully";
+                 ViewData["Message"] = $"{g.Title} was added successfully";
                 return View();
             }
 
