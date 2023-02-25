@@ -31,10 +31,10 @@ namespace eCommerceSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                 _context.Games.Add(g);              // Prepares insert
-                 await _context.SaveChangesAsync(); // pending insert
+                _context.Games.Add(g);              // Prepares insert
+                await _context.SaveChangesAsync(); // pending insert
 
-                 ViewData["Message"] = $"{g.Title} was added successfully";
+                ViewData["Message"] = $"{g.Title} was added successfully";
                 return View();
             }
 
