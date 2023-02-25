@@ -31,14 +31,39 @@ namespace eCommerceSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                 _context.Games.Add(g);              // Prepares insert
-                 await _context.SaveChangesAsync(); // pending insert
+                _context.Games.Add(g);              // Prepares insert
+                await _context.SaveChangesAsync(); // pending insert
 
-                 ViewData["Message"] = $"{g.Title} was added successfully";
+                ViewData["Message"] = $"{g.Title} was added successfully";
                 return View();
             }
 
             return View(g);
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            Game? gameToEdit = await _context.Games.FindAsync(id);
+            if (gameToEdit == null)
+            {
+                return NotFound();
+            }
+
+            return View(gameToEdit);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Game gameModel)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Games.Update(gameModel);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Index");
+            }
+
+            return View(gameModel);
         }
     }
 }
