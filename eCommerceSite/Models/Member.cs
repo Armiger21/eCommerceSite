@@ -17,4 +17,9 @@ namespace eCommerceSite.Models
         public string Phone { get; set; }
 
     }
+
+    public class RegisterViewModel
+    {
+
+    }
 }
