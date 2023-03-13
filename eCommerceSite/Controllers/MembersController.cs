@@ -20,7 +20,7 @@ namespace eCommerceSite.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterViewModel regModel) 
+        public async Task<IActionResult> Register(RegisterViewModel regModel)
         {
             if (ModelState.IsValid)
             {
@@ -36,6 +36,36 @@ namespace eCommerceSite.Controllers
                 return RedirectToAction("Index", "Home");
             }
             return View(regModel);
+        }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(LoginViewModel loginModel)
+        {
+            if (ModelState.IsValid)
+            {
+                // check db for credentials
+                Member m = (from member in _context.Members
+                            where member.Email == loginModel.Email &&
+                                  member.Password == loginModel.Password
+                            select member).SingleOrDefault();
+
+                // If exists, send to homepage
+                if (m != null)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+
+                ModelState.AddModelError(string.Empty, "Credentials not found!");
+            }
+            // Return page if no record found, or ModelState is invalid
+            return View(loginModel);
+
         }
     }
 }
