@@ -58,7 +58,7 @@ namespace eCommerceSite.Controllers
                 // If exists, send to homepage
                 if (m != null)
                 {
-                    HttpContext.Session.SetString("Email", loginModel.Email);
+                    LogUserIn(loginModel);
                     return RedirectToAction("Index", "Home");
                 }
 
@@ -67,6 +67,17 @@ namespace eCommerceSite.Controllers
             // Return page if no record found, or ModelState is invalid
             return View(loginModel);
 
+        }
+
+        private void LogUserIn(LoginViewModel loginModel)
+        {
+            HttpContext.Session.SetString("Email", loginModel.Email);
+        }
+
+        public IActionResult logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
