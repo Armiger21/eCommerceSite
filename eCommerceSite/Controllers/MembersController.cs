@@ -50,10 +50,10 @@ namespace eCommerceSite.Controllers
             if (ModelState.IsValid)
             {
                 // check db for credentials
-                Member m = (from member in _context.Members
-                            where member.Email == loginModel.Email &&
-                                  member.Password == loginModel.Password
-                            select member).SingleOrDefault();
+                //Member m = (from member in _context.Members
+                            //where member.Email == loginModel.Email &&
+                                  //member.Password == loginModel.Password
+                            //select member).SingleOrDefault();
 
                 // If exists, send to homepage
                 if (m != null)
