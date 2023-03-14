@@ -17,6 +17,8 @@
 <p>
     <a asp-action="Create" >Create Game</a>
 </p>
+@if (Model.Count() != 0)
+{
 <table class="table">
     <thead>
         <tr>
@@ -53,3 +55,8 @@
 }
     </tbody>
 </table>
+}
+else
+{
+    <h2>There are no games for this page </h2>
+}
