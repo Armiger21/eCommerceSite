@@ -2,6 +2,7 @@
 using eCommerceSite.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace eCommerceSite.Controllers
 {
@@ -14,6 +15,11 @@ namespace eCommerceSite.Controllers
         }
         public async Task<IActionResult> Index()
         {
+
+            const int NumGamesToDisplayPerPage = 3;
+
+
+
             // List<Game> games = _context.Games.ToList();
             List<Game> games = await (from game in _context.Games
                                       select game).ToListAsync();
